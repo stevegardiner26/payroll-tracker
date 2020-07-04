@@ -1,5 +1,5 @@
 # Payroll Tracker
-A way for contractors/freelancers to easily track their hours in a very minimalist way.
+A way for contractors/freelancers to easily track their hours in a very minimalist way. (Can use github issues for feature requests)
 
 ## TODO
 

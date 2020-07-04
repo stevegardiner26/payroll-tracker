@@ -5,26 +5,135 @@
     </head>
     <body>
         <div id="payroll_tracker_import">
-            <div class="nav">
+            <div class="nav row">
                 <div class="logo">Payroll Tracker</div>
-                <p>Today is Tuesday July 3rd 2010 @3:30pm</p>
+                <p class="current_time">Today is Tuesday July 3rd 2010 @3:30pm</p>
                 <a href="./records.html">Previous Records</a>
             </div>
             <div class="main">
-                
+                <div class="status text-success">Working...</div>
+                <div class="clock_time"><strong id="hours">3</strong><small>hrs</small><strong id="minutes">34</strong><small>min</small></div>
+                <div class="row button-row">
+                    <button id="start" class="btn btn-success">Clock In</button>
+                    <button id="pause" class="btn btn-dark">Pause Clock</button>
+                    <button id="resume" class="btn btn-dark">Resume Clock</button>
+                    <button id="stop" class="btn btn-danger">Clock Out</button>
+                    <button class="btn btn-secondary">Quit/Clear Day</button>
+                </div>
             </div>
         </div>
     </body>
+    <script src="./index.js"></script>
     <style>
         body {
             font-family: sans-serif;
         }
 
-        .nav {
-            height: auto;
-            padding: 15px;
+        .clock_time {
+            margin: auto;
+            text-align: center;
+        }
+
+        .clock_time strong {
+            font-size: 150px;
+            margin: 0 20px
+        }
+
+        .clock_time small {
+            font-size: 30px;
+
+        }
+
+        .btn {
+            margin: 10px;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-warning {
+            color: #212529;
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-dark {
+            color: #fff;
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+
+        .row {
             display: flex;
             flex-direction: row;
+            padding: 15px;
+        }
+
+        .nav {
+            height: auto;
+        }
+
+        .text-success {
+            color: #28a745;
+        }
+
+        .text-danger {
+            color: #dc3545;
+        }
+
+        .text-warning {
+            color: #ffc107;
+        }
+
+        .text-primary {
+            color: #007bff;
+        }
+
+        .text-info {
+            color: #17a2b8;
         }
 
         .nav a {
@@ -32,9 +141,21 @@
             display: inline;
         }
 
+        .button-row {
+            justify-content: center;
+        }
+
         .logo {
+            font-weight: bold;
             float: left;
             display: inline;
+        }
+
+        .status {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 15px;
         }
 
         .main {
@@ -42,7 +163,8 @@
             flex-flow: column nowrap;
             width: 80%;
             margin: 20px auto;
-            background: pink;
+            border-radius: 5px;
+            border: 1px solid rgba(0,0,0,.2);
             height: 500px;
         }
 

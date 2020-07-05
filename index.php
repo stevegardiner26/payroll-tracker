@@ -10,7 +10,7 @@
             <div class="nav row">
                 <div class="logo">Payroll Tracker</div>
                 <p class="current_time">Today is Tuesday July 3rd 2010 @3:30pm</p>
-                <a href="./records.html">Previous Records</a>
+                <a href="./records.php">Previous Records</a>
             </div>
             <div class="main">
                 <div id="status"></div>

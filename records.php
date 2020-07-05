@@ -5,9 +5,9 @@
 </head>
 <body onload="renderRecords()">
     <div class="nav row">
-        <div class="logo"><a href="./index.html" style="text-decoration: none; color: black;">Payroll Tracker</a></div>
+        <div class="logo"><a href="./index.php" style="text-decoration: none; color: black;">Payroll Tracker</a></div>
         <p class="current_time"></p>
-        <a href="./records.html">Previous Records</a>
+        <a href="./records.php">Previous Records</a>
     </div>
     <h1>Records</h1>
     <div class="utils">

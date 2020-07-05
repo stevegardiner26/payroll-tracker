@@ -49,10 +49,14 @@ if (localStorage.getItem("start_time") && new Date(localStorage.getItem("start_t
     if (localStorage.getItem("end_time")) {
         empty_localstorage();
     } else {
-        var input = prompt("It seems that time has gotten away from you since the last time you tracked your hours. Enter the proper date/time you stopped working: (We prefill the field with an end time 12hrs after your start time)", localStorage.getItem("start_time"));
-        console.log(input);
-        localStorage.setItem("end_time", new Date(input));
-        // TODO: If localStorage start_time was yesterday and there is no end_time ask the user to manually input an end_time and save data;
+        var input = prompt("It seems that time has gotten away from you since the last time you tracked your hours. Enter the proper date/time you stopped working: (We prefill the field with your start time so you ideally only need to edit the hours/mins)", new Date(localStorage.getItem("start_time")));
+        if (input) {
+            localStorage.setItem("end_time", new Date(input));
+            localStorage.setItem("tracking", false);
+            calculate_hours(); // TODO: Figure out how to calculate new hours for new end_time;
+            set_ui_finish();
+            save_data_to_records();
+        }
     }
 }
 
@@ -178,6 +182,7 @@ stop_btn.addEventListener("click", function () {
 
 function calculate_hours () {
     // TODO: Search timestamps to find latest resume and use timestamps to calculate proper hours
+    // Try to calculate using end_time;
     if (localStorage.getItem("end_time")) return;
     var start = localStorage.getItem("start_time");
     var hours = localStorage.getItem("hours_today");
@@ -188,11 +193,26 @@ function calculate_hours () {
 }
 
 function save_data_to_records () {
-    // TODO: Compute saving of hours to the records table
-    // Make sure to prepend and append start and end time to timestamps
-    var records = localStorage.getItem("records");
+    var records = localStorage.getItem("records") ? JSON.parse(localStorage.getItem("records")) : [];
     var start = localStorage.getItem("start_time");
     var end = localStorage.getItem("end_time");
     var hours = localStorage.getItem("hours_today");
-    var timestamps = localStorage.getItem("timestamps");
+    var timestamps = localStorage.getItem("timestamps") ? JSON.parse(localStorage.getItem("timestamps")) : [];
+    timestamps.unshift({
+        start: true,
+        tracking: true,
+        time: start
+    });
+    timestamps.push({
+        end: true,
+        tracking: false,
+        time: end
+    });
+    records.push({
+        date: start,
+        hours: hours,
+        timestamps: timestamps
+    })
+    console.log(records);
+    localStorage.setItem("records", JSON.stringify(records));
 }

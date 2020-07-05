@@ -97,6 +97,41 @@ if (!localStorage.getItem("tracking") || localStorage.getItem("tracking") == "fa
 
 document.getElementsByClassName("current_time")[0].innerHTML = "Today is " + new Date();
 
+start_btn.addEventListener("click", function () {
+    localStorage.setItem("hours_today", 0.0);
+    update_ui_time(0.0);
+    localStorage.setItem("start_time", new Date());
+    localStorage.setItem("tracking", true);
+    set_ui_tracking();
+});
+
+pause_btn.addEventListener("click", function () {
+    localStorage.setItem("tracking", false);
+    update_timestamps();
+    calculate_hours();
+    set_ui_paused();
+});
+
+resume_btn.addEventListener("click", function () {
+    localStorage.setItem("tracking", true);
+    update_timestamps();
+    calculate_hours();
+    set_ui_tracking();
+});
+
+refresh_btn.addEventListener("click", function () {
+    if (!localStorage.getItem("start_time")) return;
+    calculate_hours();
+});
+
+stop_btn.addEventListener("click", function () {
+    localStorage.setItem("tracking", false);
+    localStorage.setItem("end_time", new Date());
+    calculate_hours();
+    set_ui_finish();
+    save_data_to_records();
+});
+
 function empty_localstorage () {
     localStorage.removeItem("hours_today");
     localStorage.removeItem("tracking");
@@ -151,28 +186,6 @@ function update_ui_time (time) {
     hours_text.innerHTML = hours;
 }
 
-start_btn.addEventListener("click", function () {
-    localStorage.setItem("hours_today", 0.0);
-    update_ui_time(0.0);
-    localStorage.setItem("start_time", new Date());
-    localStorage.setItem("tracking", true);
-    set_ui_tracking();
-});
-
-pause_btn.addEventListener("click", function () {
-    localStorage.setItem("tracking", false);
-    update_timestamps();
-    calculate_hours();
-    set_ui_paused();
-});
-
-resume_btn.addEventListener("click", function () {
-    localStorage.setItem("tracking", true);
-    update_timestamps();
-    calculate_hours();
-    set_ui_tracking();
-});
-
 function update_timestamps () {
     var current_tracking = localStorage.getItem("tracking");
     var current_time = new Date();
@@ -184,21 +197,8 @@ function update_timestamps () {
     localStorage.setItem("timestamps", JSON.stringify(current_timestamps));
 }
 
-refresh_btn.addEventListener("click", function () {
-    if (!localStorage.getItem("start_time")) return;
-    calculate_hours();
-});
-
-stop_btn.addEventListener("click", function () {
-    localStorage.setItem("tracking", false);
-    localStorage.setItem("end_time", new Date());
-    calculate_hours();
-    set_ui_finish();
-    save_data_to_records();
-});
-
 function calculate_hours (set_custom_end=false) {
-    // TODO: Search timestamps to find latest resume and use timestamps to calculate proper hours
+    // TODO: Timestamp tracking seems slightly inaccurate (Also why are timestamps in UTC time)
     if (localStorage.getItem("end_time") && !set_custom_end) return;
     var start = localStorage.getItem("start_time");
     var hours = localStorage.getItem("hours_today");

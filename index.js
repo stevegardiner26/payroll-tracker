@@ -8,8 +8,18 @@
             hours: '',
             timestamps: [
                 {
+                    time: '',
+                    tracking: true,
+                    start: true
+                },
+                {
                     time: ''
-                    tracking: 'resumed',
+                    tracking: '',
+                },
+                {
+                    time: '',
+                    tracking: false,
+                    end: true
                 }
             ]
         }
@@ -49,11 +59,12 @@ if (localStorage.getItem("start_time") && new Date(localStorage.getItem("start_t
     if (localStorage.getItem("end_time")) {
         empty_localstorage();
     } else {
+        // TODO: If the clock was running have date entered. If clock paused set time to last timestamp
         var input = prompt("It seems that time has gotten away from you since the last time you tracked your hours. Enter the proper date/time you stopped working: (We prefill the field with your start time so you ideally only need to edit the hours/mins)", new Date(localStorage.getItem("start_time")));
         if (input) {
             localStorage.setItem("end_time", new Date(input));
             localStorage.setItem("tracking", false);
-            calculate_hours(); // TODO: Figure out how to calculate new hours for new end_time;
+            calculate_hours(true);
             set_ui_finish();
             save_data_to_records();
         }
@@ -77,6 +88,8 @@ if (!localStorage.getItem("tracking") || localStorage.getItem("tracking") == "fa
         set_ui_finish();
     }
 }
+
+document.getElementsByClassName("current_time")[0].innerHTML = "Today is " + new Date();
 
 function empty_localstorage () {
     localStorage.removeItem("hours_today");
@@ -178,13 +191,16 @@ stop_btn.addEventListener("click", function () {
     save_data_to_records();
 });
 
-function calculate_hours () {
+function calculate_hours (set_custom_end=false) {
     // TODO: Search timestamps to find latest resume and use timestamps to calculate proper hours
-    // Try to calculate using end_time;
-    if (localStorage.getItem("end_time")) return;
+    if (localStorage.getItem("end_time") && !set_custom_end) return;
     var start = localStorage.getItem("start_time");
     var hours = localStorage.getItem("hours_today");
     var minutes_added = Math.round(((new Date()) - (new Date(start))) / 1000 / 60);
+    if (set_custom_end) {
+        var end_time = new Date(localStorage.getItem("end_time"));
+        minutes_added = Math.round(((end_time - (new Date(start))) / 1000 / 60));
+    }
     var time = (minutes_added / 60).toFixed(2);
     localStorage.setItem("hours_today", time);
     update_ui_time(time);

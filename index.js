@@ -216,15 +216,15 @@ function calculate_hours (set_custom_end=false) {
             }
             if (i == timestamps.length - 1) {
                 ending_time = new Date();
+                if (set_custom_end) {
+                    ending_time = new Date(localStorage.getItem("end_time"));
+                }
             }
             var temp_time = Math.round(((ending_time) - (starting_time)) / 1000 / 60);;
             minutes_added += temp_time;
         }
     }
-    // maybe set a most_recent_time var
-
-    // This method will not work with the timestamp calculations now in place
-    if (set_custom_end) {
+    if (set_custom_end && !timestamps) {
         var end_time = new Date(localStorage.getItem("end_time"));
         minutes_added = Math.round(((end_time - (new Date(start))) / 1000 / 60));
     }

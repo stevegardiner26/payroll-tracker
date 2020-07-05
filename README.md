@@ -9,6 +9,7 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 
 ## TODO
 
+1. Refresh Button seems kind of pointless if a hard refresh does what it does
 1. Update Current Timestamps with Tracker Button Press
 1. Make UI Mobile Responsive
 1. Improve Hour Calculation (Seems slightly innaccurate)

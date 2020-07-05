@@ -11,7 +11,6 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 
 1. Update Current Timestamps with Tracker Button Press
 1. Make UI Mobile Responsive
-1. Allow for 12hr time AM/PM
 1. Improve Hour Calculation (Seems slightly innaccurate)
 1. Fix Issue with timestamps holding UTC time vs Local time
 1. Refactor CSS & JS to Minimal Code (Potentially 1 JS File?)

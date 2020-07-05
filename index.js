@@ -93,16 +93,17 @@ if (!localStorage.getItem("tracking") || localStorage.getItem("tracking") == "fa
 var current_stamps = JSON.parse(localStorage.getItem("timestamps"));
 if (current_stamps) {
     document.getElementById("timestamps").innerHTML = calculate_timestamps_to_string(current_stamps);
-    var start = new Date(localStorage.getItem("start_time")).toTimeString().split(" ")[0];
+    var start = new Date(localStorage.getItem("start_time")).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
     var end_date = localStorage.getItem("end_time");
     var end = "";
     if (end_date) {
-        end = new Date(end_date).toTimeString().split(" ")[0];
+        end = new Date(end_date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
     }
     document.getElementById("timestamps").innerHTML = start + " -> " + calculate_timestamps_to_string(current_stamps) + " " + end;
 }
 
-document.getElementsByClassName("current_time")[0].innerHTML = "Today is " + new Date();
+var date = new Date();
+document.getElementsByClassName("current_time")[0].innerHTML = "Today is " + date.toDateString() + " " + date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 
 start_btn.addEventListener("click", function () {
     localStorage.setItem("hours_today", 0.0);
@@ -130,11 +131,11 @@ refresh_btn.addEventListener("click", function () {
     if (!localStorage.getItem("start_time")) return;
     var current_stamps = JSON.parse(localStorage.getItem("timestamps"));
     if (current_stamps) {
-        var start = new Date(localStorage.getItem("start_time")).toTimeString().split(" ")[0];
+        var start = new Date(localStorage.getItem("start_time")).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
         var end_date = localStorage.getItem("end_time");
         var end = "";
         if (end_date) {
-            end = new Date(end_date).toTimeString().split(" ")[0];
+            end = new Date(end_date).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
         }
         document.getElementById("timestamps").innerHTML = start + " -> " + calculate_timestamps_to_string(current_stamps) + " " + end;
     }
@@ -279,7 +280,7 @@ function calculate_timestamps_to_string (stamps) {
     var rtn_str = "";
     for (var i = 0; i < stamps.length; i++) {
         var current = stamps[i];
-        var time = new Date(current.time).toTimeString().split(" ")[0]
+        var time = new Date(current.time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
         if (current.tracking == "true" || current.start) { 
             time += " -> "; 
         } else {

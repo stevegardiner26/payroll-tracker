@@ -21,7 +21,8 @@
 <script>
     // Handle Record Rendering
 
-    document.getElementsByClassName("current_time")[0].innerHTML = "Today is " + new Date();
+    var date = new Date();
+    document.getElementsByClassName("current_time")[0].innerHTML = "Today is " + date.toDateString() + " " + date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 
     function clear_records () {
         var input = confirm("Are you sure? This permanently deletes all records currently stored. Make sure your work week is over.");
@@ -68,7 +69,7 @@
         var rtn_str = "";
         for (var i = 0; i < stamps.length; i++) {
             var current = stamps[i];
-            var time = new Date(current.time).toTimeString().split(" ")[0]
+            var time = new Date(current.time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
             if (current.tracking == "true" || current.start) { 
                 time += " -> "; 
             } else {

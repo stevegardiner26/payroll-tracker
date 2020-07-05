@@ -47,7 +47,7 @@ var minutes_text = document.getElementById("minutes");
 var status_text = document.getElementById("status");
 var main_box = document.getElementsByClassName("main")[0];
 
-// TODO: Display Breaks/Timestamps on UI for current day
+// TODO: Have current timestamps generation moved to a general function so it can be called on every button press: clock in pause etc.
 
 // We assume that time moves forward
 if (localStorage.getItem("start_time") && new Date(localStorage.getItem("start_time")).getDate() != new Date().getDate()) {
@@ -215,7 +215,8 @@ function update_timestamps () {
 }
 
 function calculate_hours (set_custom_end=false) {
-    // TODO: Timestamp tracking seems slightly inaccurate (Also why are timestamps in UTC time) (Could be an issue with clocking out while paused)
+    // TODO: Timestamp tracking seems slightly inaccurate (Also why are timestamps in UTC time) 
+    // (Could be an issue with clocking out while paused)
     if (localStorage.getItem("end_time") && !set_custom_end) return;
     var start = localStorage.getItem("start_time");
     var hours = localStorage.getItem("hours_today");

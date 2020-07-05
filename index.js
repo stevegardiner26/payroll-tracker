@@ -59,8 +59,14 @@ if (localStorage.getItem("start_time") && new Date(localStorage.getItem("start_t
     if (localStorage.getItem("end_time")) {
         empty_localstorage();
     } else {
-        // TODO: If the clock was running have date entered. If clock paused set time to last timestamp
-        var input = prompt("It seems that time has gotten away from you since the last time you tracked your hours. Enter the proper date/time you stopped working: (We prefill the field with your start time so you ideally only need to edit the hours/mins)", new Date(localStorage.getItem("start_time")));
+        var prefilled_time;
+        if (localStorage.getItem("tracking") == "true") {
+            prefilled_time = new Date(localStorage.getItem("start_time"));
+        } else {
+            var tmp = JSON.parse(localStorage.getItem("timestamps"));
+            prefilled_time = new Date(tmp[tmp.length - 1].time);
+        }
+        var input = prompt("It seems that time has gotten away from you since the last time you tracked your hours. Enter the proper date/time you stopped working: (We prefill the field with your start time so you ideally only need to edit the hours/mins)", prefilled_time);
         if (input) {
             localStorage.setItem("end_time", new Date(input));
             localStorage.setItem("tracking", false);
@@ -139,7 +145,7 @@ function set_ui_tracking () {
 }
 
 function update_ui_time (time) {
-    var hours = Math.round(time);
+    var hours = Math.floor(time);
     var minutes = Math.round((time % 1) * 60);
     minutes_text.innerHTML = minutes;
     hours_text.innerHTML = hours;
@@ -196,7 +202,28 @@ function calculate_hours (set_custom_end=false) {
     if (localStorage.getItem("end_time") && !set_custom_end) return;
     var start = localStorage.getItem("start_time");
     var hours = localStorage.getItem("hours_today");
+    var timestamps = JSON.parse(localStorage.getItem("timestamps"));
     var minutes_added = Math.round(((new Date()) - (new Date(start))) / 1000 / 60);
+    if (timestamps) {
+        minutes_added = 0;
+        var ending_time, starting_time;
+        for(var i = 0; i < timestamps.length; i++) {
+            if (i == 0) {starting_time = new Date(start)}
+            if (timestamps[i].tracking == "false") {
+                ending_time = new Date(timestamps[i].time);
+            } else {
+                starting_time = new Date(timestamps[i].time);
+            }
+            if (i == timestamps.length - 1) {
+                ending_time = new Date();
+            }
+            var temp_time = Math.round(((ending_time) - (starting_time)) / 1000 / 60);;
+            minutes_added += temp_time;
+        }
+    }
+    // maybe set a most_recent_time var
+
+    // This method will not work with the timestamp calculations now in place
     if (set_custom_end) {
         var end_time = new Date(localStorage.getItem("end_time"));
         minutes_added = Math.round(((end_time - (new Date(start))) / 1000 / 60));

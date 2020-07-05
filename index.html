@@ -11,14 +11,16 @@
                 <a href="./records.html">Previous Records</a>
             </div>
             <div class="main">
-                <div class="status text-success">Working...</div>
-                <div class="clock_time"><strong id="hours">3</strong><small>hrs</small><strong id="minutes">34</strong><small>min</small></div>
+                <div id="status"></div>
+                <div class="clock_time"><strong id="hours">-</strong><small>hrs</small><strong id="minutes">--</strong><small>min</small></div>
                 <div class="row button-row">
                     <button id="start" class="btn btn-success">Clock In</button>
                     <button id="pause" class="btn btn-dark">Pause Clock</button>
                     <button id="resume" class="btn btn-dark">Resume Clock</button>
+                    <button id="refresh" class="btn btn-info" style="display: block;">Refresh</button>
                     <button id="stop" class="btn btn-danger">Clock Out / Save Hours</button>
                     <button class="btn btn-secondary">Quit/Clear Day</button>
+                    <button class="btn btn-secondary" onclick="confirm('Are you sure? This resets all progress for today.', empty_localstorage())" style="display: block;">RESET</button>
                 </div>
             </div>
         </div>
@@ -155,7 +157,7 @@
             display: inline;
         }
 
-        .status {
+        #status {
             text-align: center;
             font-size: 32px;
             font-weight: bold;

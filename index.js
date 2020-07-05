@@ -47,9 +47,6 @@ var minutes_text = document.getElementById("minutes");
 var status_text = document.getElementById("status");
 var main_box = document.getElementsByClassName("main")[0];
 
-// Check localStorage for a start_time if there is none create one.
-// Check if the time is being currently tracked and if so display hours.
-
 // TODO: Display Breaks/Timestamps on UI for current day
 
 // We assume that time moves forward
@@ -93,6 +90,18 @@ if (!localStorage.getItem("tracking") || localStorage.getItem("tracking") == "fa
     }
 }
 
+var current_stamps = JSON.parse(localStorage.getItem("timestamps"));
+if (current_stamps) {
+    document.getElementById("timestamps").innerHTML = calculate_timestamps_to_string(current_stamps);
+    var start = new Date(localStorage.getItem("start_time")).toTimeString().split(" ")[0];
+    var end_date = localStorage.getItem("end_time");
+    var end = "";
+    if (end_date) {
+        end = new Date(end_date).toTimeString().split(" ")[0];
+    }
+    document.getElementById("timestamps").innerHTML = start + " -> " + calculate_timestamps_to_string(current_stamps) + " " + end;
+}
+
 document.getElementsByClassName("current_time")[0].innerHTML = "Today is " + new Date();
 
 start_btn.addEventListener("click", function () {
@@ -119,6 +128,16 @@ resume_btn.addEventListener("click", function () {
 
 refresh_btn.addEventListener("click", function () {
     if (!localStorage.getItem("start_time")) return;
+    var current_stamps = JSON.parse(localStorage.getItem("timestamps"));
+    if (current_stamps) {
+        var start = new Date(localStorage.getItem("start_time")).toTimeString().split(" ")[0];
+        var end_date = localStorage.getItem("end_time");
+        var end = "";
+        if (end_date) {
+            end = new Date(end_date).toTimeString().split(" ")[0];
+        }
+        document.getElementById("timestamps").innerHTML = start + " -> " + calculate_timestamps_to_string(current_stamps) + " " + end;
+    }
     calculate_hours();
 });
 
@@ -196,7 +215,7 @@ function update_timestamps () {
 }
 
 function calculate_hours (set_custom_end=false) {
-    // TODO: Timestamp tracking seems slightly inaccurate (Also why are timestamps in UTC time)
+    // TODO: Timestamp tracking seems slightly inaccurate (Also why are timestamps in UTC time) (Could be an issue with clocking out while paused)
     if (localStorage.getItem("end_time") && !set_custom_end) return;
     var start = localStorage.getItem("start_time");
     var hours = localStorage.getItem("hours_today");
@@ -253,4 +272,19 @@ function save_data_to_records () {
         timestamps: timestamps
     })
     localStorage.setItem("records", JSON.stringify(records));
+}
+
+function calculate_timestamps_to_string (stamps) {
+    var rtn_str = "";
+    for (var i = 0; i < stamps.length; i++) {
+        var current = stamps[i];
+        var time = new Date(current.time).toTimeString().split(" ")[0]
+        if (current.tracking == "true" || current.start) { 
+            time += " -> "; 
+        } else {
+            time += " | ";
+        }
+        rtn_str += time;
+    }
+    return rtn_str;
 }

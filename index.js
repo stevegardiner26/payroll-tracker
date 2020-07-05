@@ -27,8 +27,6 @@
     ];
 */
 
-// TODO/FEATURE: If user ends ask if user want's to set a custom end_time
-
 var start_btn = document.getElementById("start");
 var pause_btn = document.getElementById("pause");
 var resume_btn = document.getElementById("resume");
@@ -44,10 +42,16 @@ var main_box = document.getElementsByClassName("main")[0];
 
 // TODO: Display Breaks/Timestamps on UI for current day
 
+// TODO: Add Documentation for js code
+
+// We assume that time moves forward
 if (localStorage.getItem("start_time") && new Date(localStorage.getItem("start_time")).getDate() != new Date().getDate()) {
     if (localStorage.getItem("end_time")) {
         empty_localstorage();
     } else {
+        var input = prompt("It seems that time has gotten away from you since the last time you tracked your hours. Enter the proper date/time you stopped working: (We prefill the field with an end time 12hrs after your start time)", localStorage.getItem("start_time"));
+        console.log(input);
+        localStorage.setItem("end_time", new Date(input));
         // TODO: If localStorage start_time was yesterday and there is no end_time ask the user to manually input an end_time and save data;
     }
 }

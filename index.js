@@ -141,7 +141,6 @@ start_btn.addEventListener("click", function () {
 });
 
 pause_btn.addEventListener("click", function () {
-    // Update LocalStorage timestamps
     localStorage.setItem("tracking", false);
     update_timestamps();
     calculate_hours();
@@ -149,7 +148,6 @@ pause_btn.addEventListener("click", function () {
 });
 
 resume_btn.addEventListener("click", function () {
-    // Update LocalStorage timestamps
     localStorage.setItem("tracking", true);
     update_timestamps();
     calculate_hours();
@@ -208,11 +206,10 @@ function save_data_to_records () {
         tracking: false,
         time: end
     });
-    records.push({
+    records.unshift({
         date: start,
         hours: hours,
         timestamps: timestamps
     })
-    console.log(records);
     localStorage.setItem("records", JSON.stringify(records));
 }

@@ -3,9 +3,16 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 
 ## Usage
 
-1. Clone the repo to a destination on your PC
-1. Load the `index.html` file in your favorite browser (by clicking on it this usually defaults to it opening in your default browser)
-1. All Done! It works using localStorage so there is no need to setup anything extra.
+### Live Heroku Build
+
+1. Visit https://payroll-tracker.herokuapp.com/ for a live version.
+
+### Local Usage (Faster Load Time)
+
+1. `$ git clone https://github.com/stevegardiner26/payroll-tracker.git`
+1. `$ cd payroll-tracker`
+1. Make sure PHP is installed locally and run `$ php -S localhost:8085`
+1. Visit http://localhost:8085/ in your browser and you are all done! It works using localStorage so there is no need to setup anything extra.
 
 ## TODO
 

@@ -9,6 +9,8 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 
 ## TODO
 
+1. Update Current Timestamps with Tracker Button Press
+1. Make UI Mobile Responsive
 1. Refactor CSS & JS to Minimal Code
 1. Document JS
 1. Allow for 12hr time AM/PM

@@ -1,6 +1,12 @@
 # Payroll Tracker
 A way for contractors/freelancers to easily track their hours in a very minimalist way. (Can use github issues for feature requests)
 
+## Usage
+
+1. Clone the repo to a destination on your PC
+1. Load the `index.html` file in your favorite browser (by clicking on it this usually defaults to it opening in your default browser)
+1. All Done! It works using localStorage so there is no need to setup anything extra.
+
 ## TODO
 
 1. Refactor CSS & JS to Minimal Code

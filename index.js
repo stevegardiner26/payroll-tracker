@@ -1,40 +1,40 @@
 /*
     Most of the handling and storing of information is going to be done via localStorage
-    LocalStorage DB Schema
+    
+    *----localStorage DB Schema----*
     
     records: [
         {
-            date: '',
-            hours: '',
+            date: '', // This is usually the start_time of the day
+            hours: '', // This is the total amount of hours tracked that day
             timestamps: [
                 {
                     time: '',
-                    tracking: true,
-                    start: true
+                    tracking: true, // Tracking set to true means it resumed tracking hours
+                    start: true // This signifies that this time is the starting time
                 },
                 {
                     time: ''
-                    tracking: '',
+                    tracking: true, // Tracking set to true means it resumed tracking hours
                 },
                 {
                     time: '',
-                    tracking: false,
-                    end: true
+                    tracking: false, // Tracking set to true means it resumed tracking hours
+                    end: true // This signifies that this time is the ending time
                 }
-            ]
+            ] // Timestamps keep track of everytime the tracker was interacted with. ie: start, stop, pause, resume
         }
     ]
-
-    start_time: 2019-09-09
-    end_time: NULL
-    tracking: true;
-    hours_today: 2;
+    start_time: "Sun Jul 05 2020 13:06:07 GMT-0400 (Eastern Daylight Time)"; // Used to track the time the work day is started
+    end_time: NULL; // Used to track the time the work day has officially ended
+    tracking: true; // Used to check whether the app is actively tracking/user is working (Helps when figuring out whether the time is paused or not)
+    hours_today: 2.0; // Store in a Float Value of all hours tracked today (Stored in float so that minutes can be calculated as well)
     timestamps: [
         {
-            time: '',
+            time: '', // Basic Timestamp of when the pause/resume was executed
             tracking: '', // Tracking set to true means it resumed tracking hours
         }
-    ];
+    ]; // Timestamps are used to track when the tracking is paused and resumed (Keeps track of lunch breaks etc.)
 */
 
 var start_btn = document.getElementById("start");
@@ -51,8 +51,6 @@ var main_box = document.getElementsByClassName("main")[0];
 // Check if the time is being currently tracked and if so display hours.
 
 // TODO: Display Breaks/Timestamps on UI for current day
-
-// TODO: Add Documentation for js code
 
 // We assume that time moves forward
 if (localStorage.getItem("start_time") && new Date(localStorage.getItem("start_time")).getDate() != new Date().getDate()) {

@@ -19,6 +19,7 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 1. Implement a way to add a custom record and place it in the proper date location (Use a datepicker) On Records Table
 1. Update Current Timestamps with Tracker Button Press
 1. Make UI Mobile Responsive
+1. Add compatibility for 12am rollover
 1. Improve Hour Calculation (Seems slightly innaccurate)
 1. Fix Issue with timestamps holding UTC time vs Local time
 1. Refactor CSS & JS to Minimal Code (Potentially 1 JS File?)

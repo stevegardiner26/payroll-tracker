@@ -16,6 +16,7 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 
 ## TODO
 
+1. Implement a way to add a custom record and place it in the proper date location (Use a datepicker) On Records Table
 1. Refresh Button seems kind of pointless if a hard refresh does what it does
 1. Update Current Timestamps with Tracker Button Press
 1. Make UI Mobile Responsive

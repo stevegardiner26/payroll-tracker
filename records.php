@@ -61,7 +61,7 @@
             table.appendChild(row);
         }
 
-        document.getElementById("total").innerHTML = total_hours;
+        document.getElementById("total").innerHTML = total_hours.toFixed(2);
         table_div.appendChild(table);
     }
 

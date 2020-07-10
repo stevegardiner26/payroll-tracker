@@ -129,6 +129,11 @@ resume_btn.addEventListener("click", function () {
 
 refresh_btn.addEventListener("click", function () {
     if (!localStorage.getItem("start_time")) return;
+    render_timestamps();
+    calculate_hours();
+});
+
+function render_timestamps () {
     var current_stamps = JSON.parse(localStorage.getItem("timestamps"));
     if (current_stamps) {
         var start = new Date(localStorage.getItem("start_time")).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
@@ -139,8 +144,7 @@ refresh_btn.addEventListener("click", function () {
         }
         document.getElementById("timestamps").innerHTML = start + " -> " + calculate_timestamps_to_string(current_stamps) + " " + end;
     }
-    calculate_hours();
-});
+}
 
 stop_btn.addEventListener("click", function () {
     localStorage.setItem("tracking", false);
@@ -213,6 +217,7 @@ function update_timestamps () {
         tracking: current_tracking,
     });
     localStorage.setItem("timestamps", JSON.stringify(current_timestamps));
+    render_timestamps();
 }
 
 function calculate_hours (set_custom_end=false) {

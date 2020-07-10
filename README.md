@@ -17,6 +17,7 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 ## TODO
 
 1. Implement a way to add a custom record and place it in the proper date location (Use a datepicker) On Records Table
+1. Use Github Pages to Host instead of heroku
 1. Update Current Timestamps with Tracker Button Press
 1. Make UI Mobile Responsive
 1. Add compatibility for 12am rollover
@@ -24,6 +25,7 @@ A way for contractors/freelancers to easily track their hours in a very minimali
 1. Fix Issue with timestamps holding UTC time vs Local time
 1. Refactor CSS & JS to Minimal Code (Potentially 1 JS File?)
 1. Document JS
+1. Use a Vue Template/JQuery
 1. Be able to seperate records table by a set amount of days
 1. Save to csv files in the repo? (This would require a node server to fire api calls)
 1. Make this into a vue native app?

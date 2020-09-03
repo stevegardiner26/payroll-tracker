@@ -173,3 +173,26 @@ tr, th, td {
     display: flex;
     flex-flow: row nowrap;
 }
+
+@media screen and (max-width: 600px) {
+    .main {
+        height: auto;
+    }
+
+    .clock_time {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .clock_time strong {
+        font-size: 100px;
+    }
+
+    .clock_time small {
+        font-size: 24px;
+    }
+
+    .button-row {
+        flex-flow: column;
+    }
+}
